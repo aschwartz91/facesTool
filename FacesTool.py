@@ -4,10 +4,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.chrome.options import Options
 import time
 
-
+options = Options()
+options.headless = True
+driver = webdriver.Chrome('/Users/adamschwartz/Documents/PycharmProjects/WebAutomation/chromedriver', options=options)
 
 #SETUP webdriver
 driver = webdriver.Chrome(executable_path='/Users/adamschwartz/Documents/PycharmProjects/WebAutomation/chromedriver')
@@ -18,7 +20,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name('/Users/adamschwartz/Documents/PycharmProjects/Other/tamid-fl-2021-b7d946a70f6a.json', scope)
 client = gspread.authorize(creds)
 print("gspread authorized")
-sheet = client.open("test").sheet1
+sheet = client.open("faceTool").sheet1
 names = sheet.col_values(2)
 print(names)
 
