@@ -11,24 +11,21 @@ import time
 #SETUP webdriver
 driver = webdriver.Chrome(executable_path='/Users/adamschwartz/Documents/PycharmProjects/WebAutomation/chromedriver')
 
-print("HI")
-# use creds to create a client to interact with the Google Drive API
+
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('/Users/adamschwartz/Documents/PycharmProjects/Other/tamid-fl-2021-b7d946a70f6a.json', scope)
 client = gspread.authorize(creds)
-print("HI2")
+print("gspread authorized")
 # Find a workbook by name and open the first sheet
 # Make sure you use the right name here.
 sheet = client.open("test").sheet1
-#####IGNORE, below is for testing purposes##########
 # Extract and print all of the values
 names = sheet.col_values(2)
-
+#global i = 1
 print(names)
 
-def getImage(name):
-    driver.get('https://acadinfo.wustl.edu/WSHome/Default.aspx')  # loads up
+def getStarted():
     driver.get('https://acadinfo.wustl.edu/apps/Faces/')
     time.sleep(2)
     driver.get(driver.current_url)  # connect to re-directed site - login
@@ -49,6 +46,9 @@ def getImage(name):
     btnLogin.click()
 
     time.sleep(8)
+getStarted()    
+
+def getImage(name, i):
     
     #driver.find_element(By.XPATH,'//*[@id="divHasAccess"]/div[1]/div/a[1]').click()
     
@@ -61,6 +61,7 @@ def getImage(name):
     btnSearch.click()
 
     #get image src
+    time.sleep(5)
 
     img = driver.find_element(By.XPATH, '//*[@id="Body_repResults_picPhoto_0"]/img')
     srcLink = img.get_attribute("src")
@@ -71,12 +72,23 @@ def getImage(name):
     print(func)
     #driver.get(driver.current_url)  # connect to re-directed site - duo
     #=image(" + srcLink + ')'
-    sheet.update_acell('C1', func)
+
+    
+    cell = 'C' + str(i)
+    print('replacing cell ' + cell)
+    sheet.update_acell(cell, func)
+    #i = i + 1
+    print(i)
+    cell = 'C' + str(i)
+    print('now moving onto cell ' + cell)
     #currentCell = sheet.acell('C1').value
     #sheet.update('C1', currentCell[0:])
-
+iterate = 1
 for name in names: 
-    getImage(name)
+    print(name)
+    getImage(name, iterate)
+    iterate = iterate + 1
+    time.sleep(5)
 #list_of_hashes = sheet.row_values(2)
 #tColumn = ["This", "is", "a test"]
 #index = 14 - 14 is pictures
