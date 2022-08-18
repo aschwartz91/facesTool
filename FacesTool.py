@@ -1,3 +1,7 @@
+#A. Schwartz
+#8.17.22
+#This code takes a list of WashU students names in a google spreadsheet
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from selenium import webdriver
@@ -5,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import time#add
+import time
 
 options = Options()
 options.headless = True
