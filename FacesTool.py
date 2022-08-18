@@ -66,7 +66,6 @@ def getImage(name, i):
 
     cell = 'C' + str(i)
     if driver.find_element(By.XPATH, '//*[@id="Body_lblResults"]').get_attribute("textContent") == '0 Results': 
-        
         print('replacing cell ' + cell)
         sheet.update_acell(cell, 'no picture could be found')
         print('no results found for ' + name)
@@ -74,7 +73,8 @@ def getImage(name, i):
 
     elif driver.find_element(By.XPATH, '//*[@id="Body_lblResults"]').get_attribute("textContent") != '1 Results': 
         print('multiple results found for ' + name)
-        generateImg(i)
+        sheet.update_acell(cell, 'multiple images found, find one yourself')
+        #generateImg(i)
     else:
         generateImg(i)
 
