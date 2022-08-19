@@ -92,8 +92,6 @@ for name in names:
     getImage(name, iterate)
     iterate = iterate + 1
     time.sleep(1)
-#list_of_hashes = sheet.row_values(2)
-#tColumn = ["This", "is", "a test"]
-#index = 14 - 14 is pictures
+
 
 
