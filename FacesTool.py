@@ -34,10 +34,10 @@ def getStarted():
     driver.get(driver.current_url)
 
     txtUsername = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_txtUsername"]')
-    txtUsername.send_keys('USERNAME')
+    txtUsername.send_keys('a.m.schwartz')
 
     txtPassword = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_txtPassword"]')
-    txtPassword.send_keys('PASSWORD')
+    txtPassword.send_keys('Orow2326')
 
     btnLogin = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_btnLogin"]')
     btnLogin.click()
