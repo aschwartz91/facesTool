@@ -9,6 +9,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 options = Options()
@@ -30,9 +32,11 @@ print(names)
 
 def getStarted():
     driver.get('https://acadinfo.wustl.edu/apps/Faces/')
-    time.sleep(2)
-    driver.get(driver.current_url)
+    #time.sleep(2)
+    
 
+    driver.get(driver.current_url)
+    myElem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, '//*[@id="ucWUSTLKeyLogin_txtUsername"]')))
     txtUsername = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_txtUsername"]')
     txtUsername.send_keys('a.m.schwartz')
 
@@ -42,7 +46,7 @@ def getStarted():
     btnLogin = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_btnLogin"]')
     btnLogin.click()
 
-    time.sleep(8) #DUO time
+    time.sleep(2) #DUO time
 def generateImg(i):
     img = driver.find_element(By.XPATH, '//*[@id="Body_repResults_picPhoto_0"]/img')
     srcLink = img.get_attribute("src")
