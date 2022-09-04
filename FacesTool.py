@@ -16,37 +16,31 @@ import time
 options = Options()
 options.headless = True
 driver = webdriver.Chrome('/Users/adamschwartz/Documents/PycharmProjects/WebAutomation/chromedriver', options=options)
-
-#SETUP webdriver
 driver = webdriver.Chrome(executable_path='/Users/adamschwartz/Documents/PycharmProjects/WebAutomation/chromedriver')
-
-
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('/Users/adamschwartz/Documents/PycharmProjects/Other/tamid-fl-2021-b7d946a70f6a.json', scope)
 client = gspread.authorize(creds)
-print("gspread authorized")
+
 sheet = client.open("faceTool").sheet1
 names = sheet.col_values(2)
-print(names)
 
 def getStarted():
     driver.get('https://acadinfo.wustl.edu/apps/Faces/')
-    #time.sleep(2)
-    
-
     driver.get(driver.current_url)
+    
     myElem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, '//*[@id="ucWUSTLKeyLogin_txtUsername"]')))
     txtUsername = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_txtUsername"]')
-    txtUsername.send_keys('a.m.schwartz')
+    txtUsername.send_keys('username')
 
     txtPassword = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_txtPassword"]')
-    txtPassword.send_keys('Orow2326')
+    txtPassword.send_keys('password')
 
     btnLogin = driver.find_element(By.XPATH,'//*[@id="ucWUSTLKeyLogin_btnLogin"]')
     btnLogin.click()
 
     time.sleep(2) #DUO time
+
 def generateImg(i):
     img = driver.find_element(By.XPATH, '//*[@id="Body_repResults_picPhoto_0"]/img')
     srcLink = img.get_attribute("src")
@@ -82,7 +76,6 @@ def getImage(name, i):
     elif driver.find_element(By.XPATH, '//*[@id="Body_lblResults"]').get_attribute("textContent") != '1 Results': 
         print('multiple results found for ' + name)
         sheet.update_acell(cell, 'multiple images found, find one yourself')
-        #generateImg(i)
     else:
         generateImg(i)
 
