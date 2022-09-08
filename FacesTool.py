@@ -27,10 +27,6 @@ names = sheet.col_values(2)
 
 def getStarted():
     driver.get('https://acadinfo.wustl.edu/apps/Faces/')
-<<<<<<< HEAD
-
-=======
->>>>>>> a4f22820475bdac0f91362294419b81815f677c6
     driver.get(driver.current_url)
     
     myElem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, '//*[@id="ucWUSTLKeyLogin_txtUsername"]')))
