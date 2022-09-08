@@ -32,8 +32,6 @@ print(names)
 
 def getStarted():
     driver.get('https://acadinfo.wustl.edu/apps/Faces/')
-    #time.sleep(2)
-    
 
     driver.get(driver.current_url)
     myElem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, '//*[@id="ucWUSTLKeyLogin_txtUsername"]')))
